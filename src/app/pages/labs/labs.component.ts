@@ -48,5 +48,3 @@ export class LabsComponent {
     console.log(input.value);
   }
 }
-
-console.log(LabsComponent);
