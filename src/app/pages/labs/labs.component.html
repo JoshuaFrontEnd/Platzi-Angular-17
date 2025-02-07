@@ -115,5 +115,31 @@
         <p>La condicion es menor a 18 años</p>
       </ng-template>
     </li>
+    <li>
+      <h3>*ngSwitch</h3>
+      <pre>
+        <code>
+
+          [ngSwitch]="person().name"
+          *ngSwitchCase="'Joshua'"
+          *ngSwitchCase="'Julian'"
+          *ngSwitchCase="'Ana'"
+          *ngSwitchCase="'Valentina'"
+          *ngSwitchDefault
+        </code>
+        </pre>
+      <input
+        type="text"
+        [value]="person().name"
+        (change)="changeName($event)"
+      />
+      <div [ngSwitch]="person().name">
+        <p *ngSwitchCase="'Joshua'">El nombre es Joshua</p>
+        <p *ngSwitchCase="'Julian'">El nombre es Julian</p>
+        <p *ngSwitchCase="'Ana'">El nombre es Ana</p>
+        <p *ngSwitchCase="'Valentina'">El nombre es Valentina</p>
+        <p *ngSwitchDefault>El nombre es desconocido</p>
+      </div>
+    </li>
   </ul>
 </div>
