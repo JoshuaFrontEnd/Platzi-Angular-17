@@ -19,17 +19,17 @@ export class LabsComponent {
 
   name = signal('Joshua');
 
-  age = 35;
+  age = 17;
 
   disabled = true;
 
   img = 'https://angular.io/assets/images/logos/angular/angular.svg';
 
-  person = {
+  person = signal({
     name: 'Joshua',
-    age: 35,
+    age: 17,
     avatar: 'https://angular.io/assets/images/logos/angular/angular.svg',
-  };
+  });
 
   clickHandler() {
     alert('hola');
@@ -46,5 +46,17 @@ export class LabsComponent {
   keydownHandler(event: KeyboardEvent) {
     const input = event.target as HTMLInputElement;
     console.log(input.value);
+  }
+
+  changeAge(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const newValue = input.value;
+    this.person.update((prevState) => {
+      return {
+        ...prevState,
+        // Acá se debe convertir el valor de la entrada a number
+        age: Number(newValue),
+      };
+    });
   }
 }
