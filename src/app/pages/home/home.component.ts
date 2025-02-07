@@ -67,4 +67,33 @@ export class HomeComponent {
     // Para crear validaciones con expresiones regulares:
     // validators.pattern(expresion regular),
   });
+
+  // Activar edicion de una sola tarea a la vez, evitando que se puedan editar varias al mismo tiempo
+  updateTaskEditingMode(index: number) {
+    this.tasks.update((prevState) => {
+      return prevState.map((task, position) => {
+        if (position === index) {
+          return { ...task, editing: true };
+        }
+        return {
+          ...task,
+          editing: false,
+        };
+      });
+    });
+  }
+
+  // Actualizar el texto de la tarea en el mode de edicion
+  updateTaskText(index: number, event: Event) {
+    const input = event.target as HTMLInputElement;
+
+    this.tasks.update((prevState) => {
+      return prevState.map((task, position) => {
+        if (position === index) {
+          return { ...task, title: input.value, editing: false };
+        }
+        return task;
+      });
+    });
+  }
 }
