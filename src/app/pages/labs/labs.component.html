@@ -22,4 +22,12 @@
   <!-- Pasar un parametro en un evento -->
   <p>(Event change)</p>
   <input type="number" [value]="person.age" (change)="changeHandler($event)" />
+  <!-- La diferencia entre usar "change" y "keydown" en el input es que change se dispara cuando el input pierde el foco, en cambio keydown se dispara cuando se presiona una tecla -->
+  <p>(Event change)</p>
+  <input type="text" [value]="person.name" (change)="changeHandler($event)" />
+  <p>(Event keydown)</p>
+  <input type="text" [value]="person.name" (keydown)="keydownHandler($event)" />
+  <!-- En Angular podemos especificar la tecla que dispara el evento -->
+  <p>(Event keydown, shift + t)</p>
+  <input type="text" [value]="person.name" (keydown.shift.t)="clickHandler()" />
 </div>
