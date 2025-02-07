@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-labs',
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './labs.component.html',
   styleUrl: './labs.component.css',
 })
@@ -68,6 +69,16 @@ export class LabsComponent {
         ...prevState,
         name: newValue,
       };
+    });
+  }
+
+  // Formularios reactivos:
+  colorCtrl = new FormControl();
+
+  // Obteniendo el valor desde la logica
+  constructor() {
+    this.colorCtrl.valueChanges.subscribe((value) => {
+      console.log(value);
     });
   }
 }

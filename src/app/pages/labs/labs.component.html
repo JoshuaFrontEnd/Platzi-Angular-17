@@ -142,4 +142,10 @@
       </div>
     </li>
   </ul>
+
+  <h2>Controlando un input con FormControl</h2>
+
+  <input type="color" [formControl]="colorCtrl" />
+  <!-- Obteniendo el valor directamente en el template -->
+  <p>color: {{ colorCtrl.value }}</p>
 </div>
