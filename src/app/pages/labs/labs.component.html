@@ -145,7 +145,27 @@
 
   <h2>Controlando un input con FormControl</h2>
 
+  <p>Seleccionando un color y mostrandolo en un div:</p>
+
   <input type="color" [formControl]="colorCtrl" />
   <!-- Obteniendo el valor directamente en el template -->
   <p>color: {{ colorCtrl.value }}</p>
+
+  <svg>
+    <g>
+      <rect
+        x="0"
+        y="0"
+        height="100"
+        width="100"
+        [attr.fill]="colorCtrl.value"
+      />
+    </g>
+  </svg>
+
+  <hr />
+
+  <p>Seleccionando un ancho para un div:</p>
+  <input type="number" [formControl]="widthCtrl" />
+  <span class="box" [style.width.px]="widthCtrl.value"></span>
 </div>

@@ -74,6 +74,7 @@ export class LabsComponent {
 
   // Formularios reactivos:
   colorCtrl = new FormControl();
+  widthCtrl = new FormControl(50, { nonNullable: true });
 
   // Obteniendo el valor desde la logica
   constructor() {
