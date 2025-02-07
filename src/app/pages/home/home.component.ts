@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { Task } from '../../models/task.models';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
@@ -14,10 +15,14 @@ export class HomeComponent {
     { id: Date.now(), title: 'Crear componentes', completed: false },
   ]);
 
-  changeHandler(event: Event) {
-    const input = event.target as HTMLInputElement;
-    const newTask = input.value;
-    this.addTask(newTask);
+  changeHandler() {
+    if (this.newTaskCtrl.valid) {
+      const value = this.newTaskCtrl.value.trim();
+      if (value !== '') {
+        this.addTask(value);
+        this.newTaskCtrl.setValue('');
+      }
+    }
   }
 
   // Para crear un nuevo valor en un signal usamos el metodo update, donde pasamos el estado actual y devolvemos el nuevo con el valor agregado
@@ -52,4 +57,14 @@ export class HomeComponent {
       });
     });
   }
+
+  // Manejar el input con FormControl
+  newTaskCtrl = new FormControl('', {
+    // Para indicar que el valor no sea nulo
+    nonNullable: true,
+    // Para indicar que el valor es requerido
+    validators: [Validators.required],
+    // Para crear validaciones con expresiones regulares:
+    // validators.pattern(expresion regular),
+  });
 }
