@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-labs',
@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
 export class LabsComponent {
   welcome = 'Hola!';
   tasks = ['Instalar el Angular CLI', 'Crear proyecto', 'Crear componentes'];
-  name = 'Joshua';
+  name = signal('Joshua');
   age = 35;
   disabled = true;
   img = 'https://angular.io/assets/images/logos/angular/angular.svg';
@@ -24,7 +24,10 @@ export class LabsComponent {
   }
   // Metodos con eventos
   changeHandler(event: Event) {
-    console.log(event);
+    const input = event.target as HTMLInputElement;
+    const newValue = input.value;
+    // Para modificar el valor de un signal usamos el metodo set
+    this.name.set(newValue);
   }
 
   keydownHandler(event: KeyboardEvent) {
@@ -32,3 +35,5 @@ export class LabsComponent {
     console.log(input.value);
   }
 }
+
+console.log(LabsComponent);

@@ -7,7 +7,7 @@
   <hr />
   <h2>{{ "Hola".repeat(4) }}</h2>
   <p>la suma es 3 + 3 = {{ 3 + 3 }}</p>
-  <p>Hola soy {{ name }} y mi edad es {{ age }}</p>
+  <p>Hola soy {{ name() }} y mi edad es {{ age }}</p>
   <hr />
   <!-- Property Binding - Asignar un valor de una variable a un atributo -->
   <img [src]="person.avatar" alt="" width="200" />
@@ -30,4 +30,8 @@
   <!-- En Angular podemos especificar la tecla que dispara el evento -->
   <p>(Event keydown, shift + t)</p>
   <input type="text" [value]="person.name" (keydown.shift.t)="clickHandler()" />
+  <hr />
+  <h2>Signals</h2>
+  <input type="text" [value]="name()" (change)="changeHandler($event)" />
+  <p>name: {{ name() }}</p>
 </div>
