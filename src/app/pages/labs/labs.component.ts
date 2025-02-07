@@ -19,4 +19,11 @@ export class LabsComponent {
     age: 35,
     avatar: 'https://angular.io/assets/images/logos/angular/angular.svg',
   };
+  clickHandler() {
+    alert('hola');
+  }
+  // Metodos con eventos
+  changeHandler(event: Event) {
+    console.log(event);
+  }
 }
