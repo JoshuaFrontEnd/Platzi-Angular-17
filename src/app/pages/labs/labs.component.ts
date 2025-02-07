@@ -10,4 +10,13 @@ import { Component } from '@angular/core';
 export class LabsComponent {
   welcome = 'Hola!';
   tasks = ['Instalar el Angular CLI', 'Crear proyecto', 'Crear componentes'];
+  name = 'Joshua';
+  age = 35;
+  disabled = true;
+  img = 'https://angular.io/assets/images/logos/angular/angular.svg';
+  person = {
+    name: 'Joshua',
+    age: 35,
+    avatar: 'https://angular.io/assets/images/logos/angular/angular.svg',
+  };
 }

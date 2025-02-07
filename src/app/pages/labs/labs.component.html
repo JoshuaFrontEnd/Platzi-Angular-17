@@ -3,3 +3,14 @@
 <ul>
   <li *ngFor="let task of tasks">{{ task }}</li>
 </ul>
+<hr />
+<h2>{{ "Hola".repeat(4) }}</h2>
+<p>la suma es 3 + 3 = {{ 3 + 3 }}</p>
+<p>Hola soy {{ name }} y mi edad es {{ age }}</p>
+<hr />
+<!-- Property Binding - Asignar un valor de una variable a un atributo -->
+<img [src]="person.avatar" alt="" width="200" />
+<hr />
+<input type="number" [value]="person.age" />
+<button [disabled]="disabled">Click Me</button>
+<p>{{ person.name }}</p>
