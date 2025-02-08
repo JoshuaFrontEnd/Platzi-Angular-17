@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import { Task } from '../../models/task.models';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -13,13 +13,13 @@ type FilterType = 'all' | 'pending' | 'completed';
 })
 export class HomeComponent {
   tasks = signal<Task[]>([
-    { id: Date.now(), title: 'Crear proyecto', completed: false },
-    { id: Date.now(), title: 'Crear componentes', completed: false },
+    // { id: Date.now(), title: 'Crear proyecto', completed: false },
+    // { id: Date.now(), title: 'Crear componentes', completed: false },
   ]);
 
   // Estados computados
   filter = signal<FilterType>('all');
-  // taskByFilter es creado a partir del signal filter, por eso se considera un estado computado
+  // taskByFilter es creado a partir del signal filter, por eso se considera un estado computado osea "calcula un estado nuevo a partir de otro"
   tasksByFilter = computed(() => {
     // Acá colocamos los elementos que vamos a reaccionar cuando ellos cambien
     const filter = this.filter();
@@ -38,6 +38,22 @@ export class HomeComponent {
     // Devolver todas las tareas
     return tasks;
   });
+
+  // Usar un efecto para obtener el valor de "tasks" cada vez que cambie, esto permite "trackear" los cambios y ejecutar efectos secundarios como guardar el valor de "tasks" en el localStorage
+  constructor() {
+    effect(() => {
+      const tasks = this.tasks();
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    });
+  }
+
+  // ngOnInit es un hook que se ejecuta al inicializar el componente
+  ngOnInit() {
+    const tasks = localStorage.getItem('tasks');
+    if (tasks) {
+      this.tasks.set(JSON.parse(tasks));
+    }
+  }
 
   changeHandler() {
     if (this.newTaskCtrl.valid) {
