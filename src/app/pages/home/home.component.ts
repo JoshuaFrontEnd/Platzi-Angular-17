@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { Task } from '../../models/task.models';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+
+type FilterType = 'all' | 'pending' | 'completed';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +16,28 @@ export class HomeComponent {
     { id: Date.now(), title: 'Crear proyecto', completed: false },
     { id: Date.now(), title: 'Crear componentes', completed: false },
   ]);
+
+  // Estados computados
+  filter = signal<FilterType>('all');
+  // taskByFilter es creado a partir del signal filter, por eso se considera un estado computado
+  tasksByFilter = computed(() => {
+    // Acá colocamos los elementos que vamos a reaccionar cuando ellos cambien
+    const filter = this.filter();
+    const tasks = this.tasks();
+
+    // Filtrar todas las tareas que no estan completadas, osea, las pendientes
+    if (filter === 'pending') {
+      return tasks.filter((task) => !task.completed);
+    }
+
+    // Filtrar todas las tareas que estan completadas
+    if (filter === 'completed') {
+      return tasks.filter((task) => task.completed);
+    }
+
+    // Devolver todas las tareas
+    return tasks;
+  });
 
   changeHandler() {
     if (this.newTaskCtrl.valid) {
@@ -95,5 +119,10 @@ export class HomeComponent {
         return task;
       });
     });
+  }
+
+  //
+  changeFilter(filter: FilterType) {
+    this.filter.set(filter);
   }
 }
