@@ -20,7 +20,7 @@ export class LabsComponent {
 
   name = signal('Joshua');
 
-  age = 17;
+  age = 35;
 
   disabled = true;
 
@@ -28,7 +28,7 @@ export class LabsComponent {
 
   person = signal({
     name: 'Joshua',
-    age: 17,
+    age: 35,
     avatar: 'https://angular.io/assets/images/logos/angular/angular.svg',
   });
 

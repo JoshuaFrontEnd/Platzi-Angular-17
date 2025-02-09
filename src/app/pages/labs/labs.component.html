@@ -185,4 +185,53 @@
   <p>
     <input type="text" />
   </p>
+  <hr />
+  <h1>Nueva Sintaxis</h1>
+
+  <h2>Directivas de control</h2>
+
+  <h3>*ngIf</h3>
+
+  <div>
+    @if ( name() === 'Joshua') {
+    <div>Soy Joshua</div>
+    }
+  </div>
+
+  <hr />
+
+  <h3>*ngIf else</h3>
+
+  @if ( person().name === 'Joshua' && person().age > 18) {
+  <div>Soy Joshua y soy mayor de edad</div>
+  } @else {
+  <div>Soy Joshua y soy menor de edad</div>
+  }
+
+  <hr />
+
+  <h3>*ngFor</h3>
+  <ul>
+    @for ( task of tasks(); track task; let i = $index) {
+    <li>{{ i }}{{ task }}</li>
+    } @empty {
+    <li>No hay tareas</li>
+    }
+  </ul>
+
+  <hr />
+
+  <h3>*ngSwitch</h3>
+
+  @switch (person().name) { @case ('Joshua') {
+  <p>El nombre es Joshua</p>
+  } @case ('Julian') {
+  <p>El nombre es Julian</p>
+  } @case ('Ana') {
+  <p>El nombre es Ana</p>
+  } @case ('Valentina') {
+  <p>El nombre es Valentina</p>
+  } @default {
+  <p>El nombre es desconocido</p>
+  } }
 </div>
